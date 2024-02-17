@@ -4,7 +4,25 @@ import os
 import time
 import win32ui
 import dde
+import threading
 
+txw = "RX"
+# 定义一个线程，用于接收TX状态
+def etx():
+    global txw
+    stx = 0
+    while True:
+        key1 = input()
+        if key1 == "":
+            if stx == 0:  # 定义变量TX，用于判断当前状态。0为RX，1为TX
+                ser.write(bytes.fromhex("0000000008"))
+                stx = 1
+                txw = "TX"
+            else:
+                ser.write(bytes.fromhex("0000000088"))
+                stx = 0
+                txw = "RX"
+t1 = threading.Thread(target=etx)
 # 打印欢迎界面
 print("FT-847 Satellite CAT（Computer Aided Transceiver) Program")
 print("Made by BG5EBX 2024-02-15")
@@ -84,7 +102,6 @@ while True:
                 print("修改成功!TX频率为："+str(data)+"KHz")
                 time.sleep(1)
             elif choice == "5":
-
                 # 创建一个DDE客户端
                 dde_client = dde.CreateServer()
 
@@ -116,6 +133,10 @@ while True:
                         ser.write(bytes.fromhex("000000004E"))
                         os.system('cls')
                         lst = data.split()
+                        try:
+                            t1.start()
+                        except:
+                            pass
                         # 打印接收到的数据
                         try:
                             print("卫星名称：", lst[0].lstrip("SN"))
@@ -157,6 +178,8 @@ while True:
                             ser.write(bytes.fromhex(DNC))
                             ser.write(bytes.fromhex(UPC))
                             print("正在进行多普勒校正")
+                            print("短按Enter开始TX，再按一次结束TX")
+                            print('当前状态：', txw)
                         # 等待1秒
                         time.sleep(1)
 
