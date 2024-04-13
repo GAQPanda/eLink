@@ -10,7 +10,7 @@ import serial.tools.list_ports
 txw = "RX"
 gctxw = "RX"
 ser3 = "none"
-version = "Releases 1.2"
+version = "Releases 1.3"
 
 
 # 定义一个线程，用于接收TX状态
