@@ -1,8 +1,7 @@
 
 
-# ProjectName
+# FT847 Satellite Controller
 
-ProjectName and Description
 
 <!-- PROJECT SHIELDS -->
 
