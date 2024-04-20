@@ -2,7 +2,7 @@
 
 # FT847 Satellite Controller
 
-[Englist README](https://github.com/GAQPanda/FT-847-Satellite-controller/blob/main/readme_EN.md)
+[English README](https://github.com/GAQPanda/FT-847-Satellite-controller/blob/main/readme_EN.md)
 
 <!-- PROJECT SHIELDS -->
 
