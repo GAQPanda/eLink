@@ -101,12 +101,7 @@ QRZ:qrz.com/db/BG5CVT  &ensp; qq:3200141925
 ### 鸣谢
 
 
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Img Shields](https://shields.io)
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Pages](https://pages.github.com)
-- [Animate.css](https://daneden.github.io/animate.css)
-- [xxxxxxxxxxxxxx](https://connoratherton.com/loaders)
+- [GitHub](https://github.com)
 
 <!-- links -->
 [your-project-path]:GAQPanda/FT-847-Satellite-controller
