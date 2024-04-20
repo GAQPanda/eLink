@@ -7,10 +7,15 @@ import dde
 import threading
 import serial.tools.list_ports
 
+# 定义一些初始变量
 txw = "RX"
 gctxw = "RX"
 ser3 = "none"
-version = "Releases 1.3"
+version = "Releases 1.3.1"
+
+# 本程序遵守Apache2.0协议
+# 程序中的输入错误重新输入均用while循环完成，导致程序结果臃肿。我会在空闲时优化这一项，具体方法是使用togo库来实现输入错误自动跳转回去
+# 程序中有一些重复代码段。比较臃肿，未来会更改
 
 
 # 定义一个线程，用于接收TX状态
@@ -29,7 +34,7 @@ def etx():
                 stx = 0
                 txw = "RX"
 
-
+# 以下线程用于Greencube Mode下与SoundModerm软件的联动控制发射
 def gcsm():
     global gctxw
     while True:
@@ -73,6 +78,7 @@ print("\033[0;31;40m[ERRO]\033[0m ")
 print("\033[0;34;40m[ERRO]\033[0m Version：", version)
 os.system('cls')
 
+# 定义线程
 t1 = threading.Thread(target=etx)
 t2 = threading.Thread(target=gcsm)
 t3 = threading.Thread(target=gcrts)
@@ -89,7 +95,7 @@ _____________________        ______     ______________
 
 """)
 print("\033[0;32;40m[INFO]\033[0m FT-847 Satellite CAT（Computer Aided Transceiver) Program")
-print("\033[0;32;40m[INFO]\033[0m Made/Updated by BG5CVT 2024-04-05")
+print("\033[0;32;40m[INFO]\033[0m Made/Updated by BG5CVT 2024-04-20")
 print("\033[0;32;40m[INFO]\033[0m Version :", version)
 print("\033[0;33;40m[WARN]\033[0m Only for Windows OS")
 print("\033[0;33;40m[WARN]\033[0m Only can control 144Mhz/430Mhz band")
@@ -258,7 +264,7 @@ while True:
                         time.sleep(1)
             elif choice == "6":
                 tstart = False
-                input("\033[0;33;40m[WARN]\033[0m 请确保FT-847已经退出打开Split Mode RX-TX"
+                input("\033[0;33;40m[WARN]\033[0m 请确保FT-847已经退出卫星模式并打开Split Mode RX-TX"
                       "由于电台限制，副频率需手动调整"
                       "短按Enter键以继续")
                 os.system('cls')
@@ -313,16 +319,16 @@ while True:
                                   "短按Enter键进行重新设置")
 
 
-                # 创建一个DDE客户端 gc
+                # 创建一个DDE客户端 gc mode
                 dde_client = dde.CreateServer()
 
-                # 开始DDE会话 gc
+                # 开始DDE会话 gc mode
                 dde_client.Create("MyDDEClient")
 
-                # 连接到DDE服务 gc
+                # 连接到DDE服务 gc mode
                 conversation = dde.CreateConversation(dde_client)
 
-                # 连接到特定的服务和主题 gc
+                # 连接到特定的服务和主题 gc mode
                 while True:
                     try:
                         conversation.ConnectTo("Orbitron", "Tracking")
@@ -334,7 +340,7 @@ while True:
                               "短按Enter键进行重新连接")
 
                 while True:
-                    # 请求数据 gc
+                    # 请求数据 gc mode
                     data = conversation.Request("TrackingData")
                     data = data.strip() if data else data
                     if data == "" or data is None:
@@ -358,7 +364,7 @@ while True:
                             if tstart is False:
                                 t2.start()
                                 tstart = True
-                        # 打印接收到的数据 gc
+                        # 打印接收到的数据 gc mode
                         try:
                             print("\033[0;32;40m[INFO]\033[0m 卫星名称：", lst[0].lstrip("SN"))
                         except IndexError:
