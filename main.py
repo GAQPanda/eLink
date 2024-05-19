@@ -11,7 +11,8 @@ import serial.tools.list_ports
 txw = "RX"
 gctxw = "RX"
 ser3 = "none"
-version = "Releases 1.3.1"
+version = "Releases 1.3.2"
+update = "2024.05.19"
 
 # 本程序遵守Apache2.0协议
 # 程序中的输入错误重新输入均用while循环完成，导致程序结果臃肿。我会在空闲时优化这一项，具体方法是使用togo库来实现输入错误自动跳转回去
@@ -95,7 +96,7 @@ _____________________        ______     ______________
 
 """)
 print("\033[0;32;40m[INFO]\033[0m FT-847 Satellite CAT（Computer Aided Transceiver) Program")
-print("\033[0;32;40m[INFO]\033[0m Made/Updated by BG5CVT 2024-04-20")
+print("\033[0;32;40m[INFO]\033[0m Made/Updated by BG5CVT ", update)
 print("\033[0;32;40m[INFO]\033[0m Version :", version)
 print("\033[0;33;40m[WARN]\033[0m Only for Windows OS")
 print("\033[0;33;40m[WARN]\033[0m Only can control 144Mhz/430Mhz band")
@@ -103,18 +104,20 @@ print("\033[0;33;40m[WARN]\033[0m Only for FT-847,DO NOT use for other radios!")
 print(
     "\033[0;33;40m[WARN]\033[0m This program is only for personal use, and the author is not responsible for any consequences caused by "
     "the use of this program.")
-time.sleep(5)
 
-# 创建虚拟串口
+
+
 
 
 # 询问用户输入串口信息
-os.system('cls')
+
 PORT = str(input("\033[0;32;40m[INFO]\033[0m 请输入端口号："))
 RATE = int(input("\033[0;32;40m[INFO]\033[0m 请输入波特率："))
 
 # 打开串口
 ser = serial.Serial(PORT, RATE, timeout=0.5)
+ser.setRTS(False)
+ser.setDTR(False)
 ser.write(bytes.fromhex(str("0000000000")))
 print("\033[0;32;40m[INFO]\033[0m 电台连接成功！")
 time.sleep(1)
