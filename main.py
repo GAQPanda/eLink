@@ -11,8 +11,9 @@ import serial.tools.list_ports
 txw = "RX"
 gctxw = "RX"
 ser3 = "none"
-version = "Releases 1.3.2"
-update = "2024.05.19"
+version = "Release 1.4.0"
+update = "2024.07.13"
+DNCGC = "0"
 
 # 本程序遵守Apache2.0协议
 # 程序中的输入错误重新输入均用while循环完成，导致程序结果臃肿。我会在空闲时优化这一项，具体方法是使用togo库来实现输入错误自动跳转回去
@@ -38,8 +39,22 @@ def etx():
 # 以下线程用于Greencube Mode下与SoundModerm软件的联动控制发射
 def gcsm():
     global gctxw
+    global ser3
+    global ser2
+    global GCTXW
+    global UPCGC
     while True:
-        ser.write(ser2.read())
+        ser2read = ser2.read()
+        if ser2read == b'\x08':
+            gctxw = "TX"
+            ser.write(bytes.fromhex(UPCGC))
+            time.sleep(0.2)
+            ser.write(bytes.fromhex("0000000008"))
+
+        elif ser2read == b'\x88':
+            gctxw = "RX"
+            ser.write(bytes.fromhex("0000000088"))
+
 
 
 def gcrts():
@@ -87,23 +102,21 @@ t4 = threading.Thread(target=gcdtr)
 # 打印欢迎界面
 print("""
 
-_____________________        ______     ______________ 
-\_   _____|__    ___/       /  __  \   /  |  \______  |
- |    __)   |    |  ______  >      <  /   |  |_  /    /
- |     \    |    | /_____/ /   --   \/    ^   / /    / 
- \___  /    |____|         \______  /\____   | /____/  
-     \/                           \/      |__|         
+       .____    .__        __    
+  ____ |    |   |__| ____ |  | __
+_/ __ \|    |   |  |/    \|  |/ /
+\  ___/|    |___|  |   |  \    < 
+ \___  >_______ \__|___|  /__|_ |
+     \/        \/       \/     \/
 
 """)
-print("\033[0;32;40m[INFO]\033[0m FT-847 Satellite CAT（Computer Aided Transceiver) Program")
+print("\033[0;32;40m[INFO]\033[0m eLink For FT-8*7(nd)")
 print("\033[0;32;40m[INFO]\033[0m Made/Updated by BG5CVT ", update)
 print("\033[0;32;40m[INFO]\033[0m Version :", version)
 print("\033[0;33;40m[WARN]\033[0m Only for Windows OS")
 print("\033[0;33;40m[WARN]\033[0m Only can control 144Mhz/430Mhz band")
-print("\033[0;33;40m[WARN]\033[0m Only for FT-847,DO NOT use for other radios!")
-print(
-    "\033[0;33;40m[WARN]\033[0m This program is only for personal use, and the author is not responsible for any consequences caused by "
-    "the use of this program.")
+print("\033[0;33;40m[WARN]\033[0m Only for FT-8*7(nd),DO NOT use for other radios!")
+print("============================================")
 
 
 
@@ -116,9 +129,10 @@ RATE = int(input("\033[0;32;40m[INFO]\033[0m 请输入波特率："))
 
 # 打开串口
 ser = serial.Serial(PORT, RATE, timeout=0.5)
+# 发送FT847专有的CAT开启命令
+ser.write(bytes.fromhex("0000000000"))
 ser.setRTS(False)
 ser.setDTR(False)
-ser.write(bytes.fromhex(str("0000000000")))
 print("\033[0;32;40m[INFO]\033[0m 电台连接成功！")
 time.sleep(1)
 os.system('cls')
@@ -146,11 +160,11 @@ while True:
         while True:  # 卫星模式子菜单
             os.system('cls')
             print("\033[0;32;40m[INFO]\033[0m 卫星模式子菜单：")
-            print("\033[0;32;40m[INFO]\033[0m [1] 开启Sat Mode")
-            print("\033[0;32;40m[INFO]\033[0m [2] 关闭Sat Mode")
-            print("\033[0;32;40m[INFO]\033[0m [3] 修改RX频率")
-            print("\033[0;32;40m[INFO]\033[0m [4] 修改TX频率")
-            print("\033[0;32;40m[INFO]\033[0m [5] 自动多普勒校正")
+            print("\033[0;32;40m[INFO]\033[0m [1] 开启Sat Mode(FT847 Only）")
+            print("\033[0;32;40m[INFO]\033[0m [2] 关闭Sat Mode(FT847 Only）")
+            print("\033[0;32;40m[INFO]\033[0m [3] 修改RX频率(FT847 Only）")
+            print("\033[0;32;40m[INFO]\033[0m [4] 修改TX频率(FT847 Only）")
+            print("\033[0;32;40m[INFO]\033[0m [5] 自动多普勒校正(FT847 Only）")
             print("\033[0;32;40m[INFO]\033[0m [6] Greencube模式")
             print("\033[0;32;40m[INFO]\033[0m [7] 退出")
             choice = str(input("\033[0;32;40m[INFO]\033[0m 请选择："))
@@ -209,7 +223,6 @@ while True:
                         input("\033[0;31;40m[ERRO]\033[0m 请确保Orbitron已经启动并打开DDE服务"
                               "短按Enter键进行重新连接")
                     else:
-                        ser.write(bytes.fromhex("000000004E"))
                         os.system('cls')
                         lst = data.split()
                         tstart = False
@@ -250,8 +263,8 @@ while True:
                             print("\033[0;32;40m[INFO]\033[0m 上行调制模式：", "未知")
                         DN = str(lst[3].lstrip("DN"))
                         UP = str(lst[4].lstrip("UP"))
-                        DNC = str(DN[:-1] + "11")
-                        UPC = str(UP[:-1] + "21")
+                        DNC = str(DN[:-1] + "01")
+                        UPC = str(UP[:-1] + "01")
                         if len(DNC) != 10 or len(UPC) != 10:
                             print("\033[0;31;40m[ERRO]\033[0m 多普勒频率错误")
                             input("\033[0;31;40m[ERRO]\033[0m 请确保Orbitron中频率设置正确"
@@ -267,13 +280,16 @@ while True:
                         time.sleep(1)
             elif choice == "6":
                 tstart = False
-                input("\033[0;33;40m[WARN]\033[0m 请确保FT-847已经退出卫星模式并打开Split Mode RX-TX"
-                      "由于电台限制，副频率需手动调整"
-                      "短按Enter键以继续")
-                os.system('cls')
-                print("\033[0;33;40m[WARN]\033[0m 请在Com0Com中设置双通端口对")
+                # 关闭Split模式
+                print("\033[0;33;40m[WARN]\033[0m com若为FT847用户，请手动关闭Split")
+                time.sleep(1.5)
+                os.system("cls")
+                ser.write(bytes.fromhex("0000000082"))
+                # 修改模式为USB
+                ser.write(bytes.fromhex("0A00000007"))
+                print("\033[0;33;40m[WARN]\033[0m 请在Com0Com中设置双通端口")
                 gcrate = 57600
-                gccom = input("\033[0;33;40m[WARN]\033[0m 请输入其中一个串口，并在SoundModern的设置里"
+                gccom = input("\033[0;32;40m[INFO]\033[0m 请输入其中一个串口，并在SoundModern的设置里"
                               "设置另一个串口:")
                 while True:
                     try:
@@ -284,7 +300,7 @@ while True:
                         break
                     except:
                         print("\033[0;31;40m[ERRO]\033[0m 串口打开失败")
-                        input("\033[0;31;40m[ERRO]\033[0m 请确保FT-847侧串口设置正确"
+                        input("\033[0;31;40m[ERRO]\033[0m 请确保串口设置正确"
                               "短按Enter键进行重新设置")
                         continue
                 print("\033[0;32;40m[INFO]\033[0m PTT激活方式：")
@@ -352,7 +368,6 @@ while True:
                         input("\033[0;31;40m[ERRO]\033[0m 请确保Orbitron已经启动并打开DDE服务"
                               "短按Enter键进行重新连接")
                     else:
-                        ser.write(bytes.fromhex("000000008E"))
                         os.system('cls')
                         lst = data.split()
                         if GCTXW == "2":
@@ -398,15 +413,17 @@ while True:
                             print("\033[0;32;40m[INFO]\033[0m 上行调制模式：", "未知")
                         DNGC = str(lst[3].lstrip("DN"))
                         UPGC = str(lst[4].lstrip("UP"))
+                        old_DN = DNCGC
                         DNCGC = str(DNGC[:-1] + "01")
+                        UPCGC = str(UPGC[:-1] + "01")
                         if len(DNCGC) != 10:
                             print("\033[0;31;40m[ERRO]\033[0m 多普勒频率错误")
                             input("\033[0;31;40m[ERRO]\033[0m 请确保Orbitron中频率设置正确，短按Enter键进行重新控制")
                             continue
                         else:
-                            ser.write(bytes.fromhex(DNCGC))
-                            # 将Main Mode改为USB
-                            ser.write(bytes.fromhex("0100000007"))
+                            if gctxw == "RX":
+                                if old_DN != DNCGC:
+                                    ser.write(bytes.fromhex(DNCGC))
                             print("\033[0;32;40m[INFO]\033[0m 正在进行多普勒校正")
                             print("\033[0;32;40m[INFO]\033[0m 目前状态：", gctxw)
                         # 等待0.5秒
@@ -448,8 +465,7 @@ while True:
                     input("\033[0;31;40m[ERRO]\033[0m 请确保DTR串口设置正确"
                           "短按Enter键进行重新设置")
         else:
-            input('\033[0;31;40m[ERRO]\033[0m ')
-            break
+            print("")
         print("\033[0;32;40m[INFO]\033[0m 发射控制子菜单：")
         print("\033[0;32;40m[INFO]\033[0m 短按Enter开始TX，再按一次结束TX")
         print("\033[0;32;40m[INFO]\033[0m 输入Q退出")
