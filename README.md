@@ -1,6 +1,6 @@
 
 
-# FT847 Satellite Controller
+# eLink For FT8*7,FT8*8(nd)自动多普勒+Greencube半自动使用
 
 [English README](https://github.com/GAQPanda/FT-847-Satellite-controller/blob/main/readme_EN.md)
 
@@ -21,9 +21,9 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">FT847卫星程序</h3>
+  <h3 align="center">FT8*7,FT8*8(nd)卫星程序</h3>
   <p align="center">
-    自动控制FT847进行多普勒频移    <br />
+    自动控制电台进行多普勒频移    <br />
     <a href="https://github.com/GAQPanda/FT-847-Satellite-controller"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
