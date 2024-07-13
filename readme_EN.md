@@ -1,62 +1,64 @@
-# FT847 Satellite Controller
 
-English version machine translated by Google
+# eLink For FT8-7,FT8-8(nd) Auto Doppler + Greencube Semi-Auto Use
 
-<!-- PROJECT SHIELDS -->
+[English README](https://github.com/GAQPanda/FT-847-Satellite-controller/blob/main/readme_EN.md)
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<! -- PROJECT SHIELDS -->
 
-<!-- PROJECT LOGO -->
+[! [Contributors][contributors-shield]][contributors-url]
+[! [Forks][forks-shield]][forks-url]
+[! [Stargazers][stars-shield]][stars-url]
+[! [Issues][issues-shield]][issues-url]
+[! [MIT License][license-shield]][license-url]
+[! [LinkedIn][linkedin-shield]][linkedin-url]
+
+<! -- PROJECT LOGO -->
 <br />
 
 <p align="center">
-   <a href="https://github.com/GAQPanda/FT-847-Satellite-controller/">
-     <img src="images/logo.png" alt="Logo" width="80" height="80">
-   </a>
+  <a href="https://github.com/GAQPanda/FT-847-Satellite-controller/">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-   <h3 align="center">FT847 satellite program</h3>
-   <p align="center">
-     Automatically control FT847 for Doppler frequency shift<br />
-     <a href="https://github.com/GAQPanda/FT-847-Satellite-controller"><strong>Explore this project's documentation »</strong></a>
-     <br />
-     <br />
-     <a href="https://github.com/GAQPanda/FT-847-Satellite-controller">View Demo</a>
-     ·
-     <a href="https://github.com/GAQPanda/FT-847-Satellite-controller/issues">Report a Bug</a>
-     ·
-     <a href="https://github.com/GAQPanda/FT-847-Satellite-controller/issues">Propose new features</a>
-   </p>
+  <h3 align="center">FT8*7,FT8*8(nd) Satellite Programme</h3>
+  <p align="center">
+    Automatically control the radio to perform Doppler shift
+    支持FT817(nd),FT818(nd),FT847(Early&Late),FT857(D),FT897(D),FT818<br />
+    <a href="https://github.com/GAQPanda/FT-847-Satellite-controller"><strong>探索本项目的文档 »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/GAQPanda/FT-847-Satellite-controller">View Demo</a>
+    ·
+    <a href="https://github.com/GAQPanda/FT-847-Satellite-controller/issues">Report Bugs</a>
+    ·
+    <a href="https://github.com/GAQPanda/FT-847-Satellite-controller/issues">Suggest new features</a>
+  </p>
 
 </p>
 
 
  
-## Table of contents
+## Contents.
 
-- [Getting Started Guide](#Getting Started Guide)
-- [Developed Architecture](#Developed Architecture)
-- [language used](#language used)
-- [contributor](#contributor)
-- [Author](#author)
-- [ACKNOWLEDGMENTS](#ACKNOWLEDGMENTS)
+- [ Getting Started Guide ](#Getting Started Guide)
+- [ Developed architecture ](#Developed architecture)
+- [ Language used ](#Language used)
+- [ Contributors ](#Contributors)
+- [ Author ](#Author)
+- [ acknowledgements ](#Acknowledgements)
 
 ### Getting Started Guide
 
-See Manual.pdf for details
+See Manual.pdf for details.
 
 
-### Developed architecture
+### Architecture of development 
 
-Please read [ARCHITECTURE.md](https://github.com/GAQPanda/FT-847-Satellite-controller/blob/master/ARCHITECTURE.md) to view the architecture of this project.
+Please read [ARCHITECTURE.md](https://github.com/GAQPanda/FT-847-Satellite-controller/blob/master/ARCHITECTURE.md) for the architecture of the project.
 
 ### Deployment
 
-None yet
+Not available at this time.
 
 ### Language used
 
@@ -64,11 +66,11 @@ None yet
 
 ### Contributors
 
-Please read **CONTRIBUTING.md** to see the developers who contributed to the project.
+Please read **CONTRIBUTING.md** to find out who contributed to this project.
 
-#### How to participate in open source projects
+#### How to Participate in Open Source Projects
 
-Contributions make the open source community a great place to learn, inspire, and create. Any contribution you make is **very much appreciated**.
+Contributing makes the open source community a great place to learn, inspire, and create. Any contribution you make is **very much appreciated**.
 
 
 1. Fork the Project
@@ -79,29 +81,29 @@ Contributions make the open source community a great place to learn, inspire, an
 
 
 
-### version control
+### Versioning
 
-This project uses Git for version management. You can see the currently available versions in the repository.
+This project uses Git for versioning. You can see the currently available versions in the repository.
 
-### author
+### Author
 
-BG5CVT
+BG5CVT 
 FatPanda8885@foxmail.com
 
-QRZ:qrz.com/db/BG5CVT &ensp; qq:3200141925
+QRZ:qrz.com/db/BG5CVT &ensp; qq:3200141925   
 
-  *You can also view all developers participating in the project in the contributor list. *
+ * You can also see all the developers involved in the project in the contributors list. *
 
-### Copyright statement
+### Copyright
 
-The project is signed with the Apache-2.0 license. For details, please refer to [LICENSE.txt](https://github.com/GAQPanda/FT-847-Satellite-controller/blob/master/LICENSE.txt)
+This project is licensed under the Apache-2.0 Licence, see [LICENSE.txt](https://github.com/GAQPanda/FT-847-Satellite-controller/blob/master/LICENSE.txt) for details.
 
-### Acknowledgments
+### Acknowledgements
 
 
 - [GitHub](https://github.com)
 
-<!-- links -->
+<! -- links -->
 [your-project-path]:GAQPanda/FT-847-Satellite-controller
 [contributors-shield]: https://img.shields.io/github/contributors/GAQPanda/FT-847-Satellite-controller.svg?style=flat-square
 [contributors-url]: https://github.com/GAQPanda/FT-847-Satellite-controller/graphs/contributors
@@ -115,3 +117,9 @@ The project is signed with the Apache-2.0 license. For details, please refer to 
 [license-url]: https://github.com/GAQPanda/FT-847-Satellite-controller/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/shaojintian
+
+
+
+
+
+Translated with DeepL.com (free version)
