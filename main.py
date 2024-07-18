@@ -43,6 +43,7 @@ def gcsm():
     global ser2
     global GCTXW
     global UPCGC
+    global DNCGC
     while True:
         ser2read = ser2.read()
         if ser2read == b'\x08':
@@ -54,6 +55,8 @@ def gcsm():
         elif ser2read == b'\x88':
             gctxw = "RX"
             ser.write(bytes.fromhex("0000000088"))
+            time.sleep(0.2)
+            ser.write(bytes.fromhex(DNCGC))
 
 
 
