@@ -284,7 +284,7 @@ while True:
             elif choice == "6":
                 tstart = False
                 # 关闭Split模式
-                print("\033[0;33;40m[WARN]\033[0m com若为FT847用户，请手动关闭Split")
+                print("\033[0;33;40m[WARN]\033[0m 若为FT847用户，请手动关闭Split")
                 time.sleep(1.5)
                 os.system("cls")
                 ser.write(bytes.fromhex("0000000082"))
