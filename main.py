@@ -11,8 +11,8 @@ import serial.tools.list_ports
 txw = "RX"
 gctxw = "RX"
 ser3 = "none"
-version = "Release 1.4.0"
-update = "2024.07.13"
+version = "Release 1.4.1"
+update = "2024.07.18"
 DNCGC = "0"
 
 # 本程序遵守Apache2.0协议
